@@ -1,0 +1,29 @@
+<div class="card">
+	<div class="card-body">
+		<h1 class="card-title">Markers</h1>
+	</div>
+
+	<div class="card-body">
+
+		<div class="row">
+			<form class="col">
+
+				<!-- <button type="button" class="btn btn-primary m-1" (click)="addMarker()">Add Marker</button> -->
+
+				<button type="button" class="btn btn-primary m-1" (click)="removeMarker()">Remove Marker</button>
+
+			</form>
+		</div>
+		<div class="row">
+			<label class="col col-form-label">{{markers?.length}} Markers</label>
+		</div>
+
+		<!-- Map -->
+
+		<div style="height: 100vh;" leaflet [leafletOptions]="options" [leafletLayers]="markers"
+			(leafletMapReady)="onMapReady($event)"></div>
+
+
+	</div>
+
+</div>
