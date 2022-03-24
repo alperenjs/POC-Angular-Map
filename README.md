@@ -1,6 +1,7 @@
 # POCAngularMap
 
 Leaflet is combined with routing-machine to create dynamic routes between location markers.
+This POC is created to prove that leaflet can be used with generated data and can update async route for data coming from websocket.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.13.
 
