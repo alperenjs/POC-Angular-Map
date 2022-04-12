@@ -1,0 +1,72 @@
+<div>
+    <search-filter-panel #searchFilterPanel [onSearch]="ara" [onClear]="temizle" [filterForm]="filterForm"
+        (onFormSubmitAttempt)="onFormSubmitAttempt($event)">
+
+        <div [formGroup]="filterForm">
+            <div class="row w-100">
+                <div class="dx-field-value  col-md-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="il">Robot Seçimi</label>
+                        <dx-tag-box #tagBoxRobotListesi id="robot" class="dx-vuex-input" [items]="robotListesi"
+                            displayExpr="makineAdi" valueExpr="makineId" [showSelectionControls]="true"
+                            formControlName="formControlRobotlar" applyValueMode="instantly" [searchEnabled]="true"
+                            (onInput)="onRobotInput($event)" (onValueChanged)="dxClearSearchKey($event)">
+                        </dx-tag-box>
+                    </div>
+                    <div class="form-group">
+                        <label for="ip-adresi">Ip Adresi</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="formControlIpAdresi"
+                            id="ip-adresi" />
+                    </div>
+                </div>
+                <div class="dx-field-value  col-md-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="il">İl</label>
+                        <dx-tag-box #tagBoxSehirler id="il" class="dx-vuex-input" [items]="sehirler" displayExpr="ad"
+                            valueExpr="id" [showSelectionControls]="true" formControlName="formControlSehirler"
+                            (onValueChanged)="dxClearSearchKey($event)" applyValueMode="instantly"
+                            [searchEnabled]="true" (onValueChanged)="[onCityChange($event)]">
+                        </dx-tag-box>
+                    </div>
+                    <div class="form-group">
+                        <!--ilçe seçimi-->
+                        <label for="ilce">İlçe</label>
+                        <dx-tag-box #dxIlceSelect id="ilce" class="dx-vuex-input" [items]="ilceler" displayExpr="ad"
+                            valueExpr="id" [showSelectionControls]="true" formControlName="formControlIlceler"
+                            applyValueMode="instantly" [searchEnabled]="true">
+                        </dx-tag-box>
+                    </div>
+                </div>
+                <div class="dx-field-value  col-md-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label for="ureticiFirma">Firma Seçimi</label>
+                        <dx-tag-box #uiFirma id="uiFirmalar" class="dx-vuex-input" [items]="firmalarSelected"
+                            displayExpr="ad" valueExpr="id" [showSelectionControls]="true"
+                            formControlName="formControlUiFirmalar" (onInput)="onFirmaInput($event)"
+                            applyValueMode="instantly" [searchEnabled]="true"
+                            (onValueChanged)="dxClearSearchKey($event)">
+                        </dx-tag-box>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="sahaPersoneli">Saha Personeli</label>
+                        <dx-tag-box #tagBoxSehirler id="sahaPersoneli" class="dx-vuex-input" [items]="sahaPersonelleri"
+                            displayExpr="ad" valueExpr="id" [showSelectionControls]="true"
+                            formControlName="formControlSahaPersoneli" applyValueMode="instantly" [searchEnabled]="true"
+                           >
+                        </dx-tag-box>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </search-filter-panel>
+    <div class="wrapper">
+        <div #map id="ol-map-makine" class="map-container" style="width: 100%; height: 100%">
+        </div>
+        <div #popup id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+        <div class="selected-user-badges" #badgesContainer></div>
+    </div>
+</div>
