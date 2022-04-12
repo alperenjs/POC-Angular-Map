@@ -1,6 +1,100 @@
-<div #map id="ol-map" class="map-container">
-</div>
-<div id="popup" class="ol-popup">
-    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
+<div class="wrapper">
+    <div #map id="ol-map-personel" class="map-container" style="width: 100%; height: 100%">
+    </div>
+    <div #popup id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
+
+    <div class="selected-user-badges" #badgesContainer></div>
+
+    <div class="filter-section personel-takip-filtre" [formGroup]="filterForm">
+        <div class="card filter-header">
+            <ngb-accordion #tarihAccordion [closeOthers]="false">
+                <ngb-panel>
+                    <ng-template ngbPanelTitle>
+                        <div class="card-header">
+                            <h6 class="card-title"><span [data-feather]="'clock'" class="mr-1"></span>Personel Bazlı
+                            </h6>
+                            <div class="custom-control custom-checkbox ml-2">
+                                <input type="checkbox" class="custom-control-input" (click)="togglePersonelBazli()"
+                                    [checked]="personelBazli" id="personelBazli" (change)="onPersonelBazliChange()" />
+                                <label class="custom-control-label" for="personelBazli"></label>
+                            </div>
+
+                            <h6 class="card-title"><span [data-feather]="'navigation'" class="mr-1"></span>Rota Çiz</h6>
+                            <div class="custom-control custom-checkbox ml-2">
+                                <input [checked]="rotaCizilsinmi" type="checkbox" class="custom-control-input" id="rota"
+                                    (click)="toggleRota()" (change)="onRotaChange()" />
+                                <label class="custom-control-label" for="rota"></label>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="col-12">
+                            <label for="baslangicTarihi">Başlangıç Tarihi</label>
+                            <div class="d-flex form-group mb-1">
+                                <dx-date-box id="baslangicTarihi" formControlName="baslangicTarihi" type="datetime">
+                                </dx-date-box>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="bitisTarihi">Bitiş Tarihi</label>
+                            <div class="d-flex form-group mb-0">
+                                <dx-date-box id="bitisTarihi" formControlName="bitisTarihi" type="datetime">
+                                </dx-date-box>
+                            </div>
+                            <small class="form-text text-danger" *ngIf="filterForm.errors?.hourLimitInvalid">Saat farkı
+                                1'den
+                                büyük olamaz.</small>
+                            <small class="form-text text-danger"
+                                *ngIf="filterForm.errors?.startEndCheckInvalid">Başlangıç tarihi,
+                                bitiş
+                                tarihinden büyük olamaz.</small>
+                            <small class="form-text text-danger" *ngIf="isPersonelEmpty">Tarih
+                                seçimi, yalnızca personel seçimi ile mümkün.</small>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+
+                <ngb-panel>
+                    <ng-template ngbPanelTitle>
+                        <div class="card-header">
+                            <h6 class="card-title"><span [data-feather]="'file-text'" class="mr-1"></span>Personel
+                                Listesi</h6>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="card-body personel-list-card">
+                            <ngb-accordion [closeOthers]="true">
+                                <ngb-panel *ngFor="let kategori of kategoriler" id="{{kategori[0]}}">
+                                    <ng-template ngbPanelTitle>
+                                        <span>{{kategori[1][0]['rol']}}</span>
+                                    </ng-template>
+                                    <ng-template ngbPanelContent>
+                                        <div class="form-group">
+                                            <label for={{kategori[0]}}>Personel Listesi</label>
+                                            <dx-tag-box id="yazilimPersonel" class="dx-vuex-input" [items]="kategori[1]"
+                                                displayExpr="ad" valueExpr="id" [showSelectionControls]="true"
+                                                formControlName="formControl{{kategori[0]}}" applyValueMode="instantly"
+                                                [searchEnabled]="true">
+                                            </dx-tag-box>
+                                        </div>
+                                    </ng-template>
+                                </ngb-panel>
+                            </ngb-accordion>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+
+            <button type="submit" rippleeffect="" (click)="temizle()"
+                class="btn btn-sm btn-outline-primary waves-effect waves-float waves-light mr-1 ml-1"
+                style="margin-bottom: 3px;">
+                <span [data-feather]="'x'" class="mr-1"></span>Temizle</button>
+            <button type="submit" rippleeffect="" (click)="ara()"
+                class="btn btn-sm btn-primary waves-effect waves-float waves-light mr-1 ml-1 mb-1">
+                <span [data-feather]="'search'" class="mr-1"></span>Ara</button>
+        </div>
+    </div>
 </div>
