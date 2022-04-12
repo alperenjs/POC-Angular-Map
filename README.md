@@ -13,21 +13,26 @@
   <h3 align="center">OpenLayers & Angular</h3>
 
   <p align="center">
-    Created map with ability to draw routes between markers in Angular & OpenLayers 
+    Created map with ability to: </br>
+   - draw routes between markers</br>
+- cluster feature for adaptive grouping on zoom out & zoom in </br> Angular & OpenLayers 
   </p>
   <div align="center">
   <div style="display: flex;">
-    <img style="max-width:400px; height:auto;" src="https://github.com/alperenjs/POC-Angular-Map/blob/main/preview.png" style="max-width: 300px" alt="Logo">
+    <img style="max-width:400px; height:auto;" src="https://github.com/alperenjs/POC-Angular-Map/blob/main/gif.gif" style="max-width: 300px" alt="Logo">
   </div>
 </div>
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+!This codebase is just for referencing the base methods and their usage for components. </br> This code is not running on local.
 
 Some Fun Facts:
 * Stored base methods like initMap, drawRoute, updateMarkers etc inside baseMap class. Custom pages extend from it.
 * With current methods as POC, by referencing them, all methods can be created.
+* Ability to draw route option
+* Ability for clustered view with reactive to zoom
 * Clear boilerplate.
 
 
